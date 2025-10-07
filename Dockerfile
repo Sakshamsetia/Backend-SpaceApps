@@ -40,6 +40,7 @@ RUN pip install -r requirements.txt
 
 # Copy the chroma database into the image (read-only for demo)
 COPY chroma_langchain_db/ /app/chroma_langchain_db/
+RUN chown -R appuser:appuser /app
 
 # Copy the source code into the container.
 COPY . .
