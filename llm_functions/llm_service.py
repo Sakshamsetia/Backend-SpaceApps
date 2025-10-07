@@ -16,6 +16,8 @@ from langchain.callbacks.base import BaseCallbackHandler
 from pydantic import BaseModel, Field
 from django.http import JsonResponse, StreamingHttpResponse
 from django.views.decorators.csrf import csrf_exempt
+import sys # <-- Add this import
+import traceback # <-- And this one
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -59,7 +61,10 @@ try:
         persist_directory="/app/chroma_langchain_db"
     )
 except Exception as e:
-    print(f"Error initializing vector store: {e}")
+    print("--- ❌ FATAL: ERROR INITIALIZING VECTOR STORE ❌ ---")
+    traceback.print_exc() # This prints the full, detailed error
+    print("----------------------------------------------------")
+    vector_store = None # Keep this for now so the app doesn't crash on startup
     vector_store = None
 
 
