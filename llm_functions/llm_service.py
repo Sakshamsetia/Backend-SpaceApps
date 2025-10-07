@@ -56,7 +56,7 @@ try:
     vector_store = Chroma(
         collection_name="example_collection",
         embedding_function=embeddings,
-        persist_directory="./../chroma_langchain_db",
+        persist_directory="/app/chroma_langchain_db"
     )
 except Exception as e:
     print(f"Error initializing vector store: {e}")

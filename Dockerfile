@@ -38,11 +38,14 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 
-# Switch to the non-privileged user to run the application.
-USER appuser
+# Copy the chroma database into the image (read-only for demo)
+COPY chroma_langchain_db/ /app/chroma_langchain_db/
 
 # Copy the source code into the container.
 COPY . .
+
+# Switch to the non-privileged user to run the application.
+USER appuser
 
 # Expose the port that the application listens on.
 EXPOSE 8000
